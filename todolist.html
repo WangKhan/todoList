@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id='todolist'>
+        <div>
+            <h1>todolist</h1>
+            <input type="text" v-model='thing' @keyup.enter="add" placeholder="what to do">
+            <ul>
+                <li v-for="(item,index) in things">{{index}}   {{item}}
+                    <button type="button" @click='del(index)'>X</button>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span v-show='things.length'>{{things.length}} items exist</span>
+            <button v-show='things.length' type="button" @click='clear'>clear</button>
+        </div>
+    </div>
+
+</body>
+<script>
+    var todo=new Vue({
+        el:'#todolist',
+        data:{
+            thing:'',
+            things:[]
+        },
+        methods:{
+            add:function(){
+                this.things.push(this.thing);
+                this.thing=''
+            },
+            del:function(index){
+                this.things.splice(index,1)
+            },
+            clear:function(){
+                this.things=[];
+            }
+        }
+    })
+</script>
+</html>
